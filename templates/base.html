@@ -1,0 +1,56 @@
+<!doctype html>
+{% load compress %}
+<html>
+    <head>
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+        {% block meta %}
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% endblock meta %}
+
+        {% block css %}
+            {% compress css %}
+                <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+                <link href="{{ STATIC_URL }}css/clean-blog.css" rel="stylesheet">
+            {% endcompress css %}
+                <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+                <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+                <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+                <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+            <link rel="SHORTCUT ICON" href="/favicon.ico" />
+        {% endblock css %}
+
+        {% block headjs %}
+        {% endblock headjs %}
+
+        <script type='text/javascript'>
+        </script>
+    </head>
+    <body>
+        {% block header %}
+            {% include "header.html" %}
+        {% endblock header %}
+
+        {% block innerbody %}
+        {% endblock innerbody %}
+
+        {% block footer %}
+            {% include "footer.html" %}
+        {% endblock footer %}
+
+        {% block js %}
+            {% compress js %}
+                <script src="{{ STATIC_URL }}js/jquery.js"></script>
+                <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+                <script src="{{ STATIC_URL }}js/clean-blog.js"></script>
+            {% endcompress %}
+        {% endblock js %}
+
+        {% block GA %}
+        {% endblock GA %}
+    </body>
+</html>

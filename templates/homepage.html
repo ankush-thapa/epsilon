@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block meta %}
+{{block.super}}
+    <meta name="description" content="{{author.blog_description}}">
+    <meta name="keywords" content="{{author.blog_keywords}}">
+    <meta name="author" content="{{author.first_name}} {{author.last_name}}">
+{% endblock meta %}
+{% block title %}
+    {{author.blog_title}}
+{% endblock %}
+{% block innerbody %}
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('{{author.cover_image.url}}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>{{author.blog_name|upper}} !<h1>
+                        <hr class="small">
+                        <span class="subheading" style="color:grey; font-weight:bold;"><i>{{author.blog_tagline}}</i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+		{% comment %}
+		{% if category.0 %}
+		<h3 style="font-size:36px;"> Blogs on {{category.0|title}}:</h3>
+		{% endif %}
+		{% endcomment %}
+
+                {% for blog in blogs %}
+                    <div class="post-preview">
+                        <a href="{{blog.get_url}}">
+                            <h2 class="post-title">
+                                {{ blog.title }}
+                            </h2>
+                            <h3 class="post-subtitle">
+                                {{ blog.short_description|truncatechars:200 }}
+                            </h3>
+                        </a>
+                        <p class="post-meta views">&nbsp;{{ blog.views }}&nbsp;views&nbsp;&middot;&nbsp;Posted by <a href="/about/">{{ blog.written_by.first_name }} {{blog.written_by.last_name }}</a>&nbsp;&middot;&nbsp;{{ blog.created_on|date }}<em></em></p>
+                            
+                    </div>
+                    <hr>
+                {% endfor %}
+
+                <!-- Pager -->
+                <ul class="pager">
+                    {% comment %}
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                    {% endcomment %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr>
+{% endblock innerbody %}

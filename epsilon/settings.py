@@ -60,7 +60,7 @@ ROOT_URLCONF = 'epsilon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +68,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.static',
+                'django.core.context_processors.media',
                 'apps.blog.context_processor.get_categories_in_context',
             ],
         },
@@ -116,7 +118,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = PROJECT_PATH + '/static/'
 
 # django compressor
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 COMPRESS_OUTPUT_DIR = ''
 COMPRESS_OFFLINE = True
 STATICFILES_FINDERS = (

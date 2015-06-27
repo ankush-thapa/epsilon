@@ -22,7 +22,7 @@ class Blog(models.Model):
     created_on = models.DateTimeField(auto_now_add=True, db_column='createdon')
     moderated_on = models.DateTimeField(null=True, blank=True, db_column='moderatedon')
     last_modified_on = models.DateTimeField(null=True, blank=True, db_column='lastmodifiedon')
-    header_image = models.ImageField(upload_to = 'blog/static/images/', null=True, blank=True, db_column='header_image')
+    header_image = models.ImageField(upload_to = 'static/images/', null=True, blank=True, db_column='header_image')
 
     def __unicode__(self):
         return str(self.title)
@@ -39,7 +39,18 @@ class Blog(models.Model):
         return '%s' % str(name)
 
 class Writer(User):
-    pass
+    cover_image = models.ImageField(upload_to = 'static/images/', null=True, blank=True, db_column='cover_image')
+    domain_name = models.CharField(max_length=100, db_column='domain_name')
+
+    # blog details
+    blog_name = models.CharField(max_length=100, db_column='blog_name')
+    blog_tagline = models.CharField(max_length=100, db_column='blog_tagline')
+    blog_meta_title = models.CharField(max_length=150, db_column='blog_meta_title')
+    blog_meta_description = models.CharField(max_length=300, db_column='blog_meta_description')
+    blog_meta_keywords = models.CharField(max_length=500, db_column='blog_meta_keywords')
+    facebook_link = models.CharField(max_length=100, db_column='facebook_link')
+    twitter_link = models.CharField(max_length=100, db_column='twitter_link')
+    gplus_link = models.CharField(max_length=100, db_column='gplus_link')
 
     def __unicode__(self):
         return str(self.first_name)
@@ -62,7 +73,7 @@ class ContactMe(models.Model):
         return str(self.contact_name)
 
 class PublicImage(models.Model):
-    image = models.ImageField(upload_to = 'blog/static/images/', null=True, blank=True, db_column='header_image') 
+    image = models.ImageField(upload_to = 'static/images/', null=True, blank=True, db_column='header_image') 
 
     def __unicode__(self):
 	name = self.image.name.split('/')[-1]

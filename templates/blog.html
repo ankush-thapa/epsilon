@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load disqus_tags %}
+{% load blog_tags %}
+{% block meta %}
+{{block.super}}
+    <meta name="description" content="{{blog.short_description}}">
+    <meta name="keywords" content="{{blog.tags}}">
+    <meta name="author" content="Namrata Jain">
+{% endblock meta %}
+{% block title %}
+    Rotten Out Tips | {{blog.title }}
+{% endblock %}
+{% block innerbody %}
+    <header class="intro-header" style="background-image: url('{{ blog.get_header_image_url}}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>{{ blog.title }}</h1>
+			{% comment %}
+                        <h2 class="subheading">{{ blog.short_description }}</h2>
+			{% endcomment %}
+                        <span class="meta views">&nbsp;{{ blog.views }}&nbsp;views&nbsp;&middot;&nbsp;Posted by <a href="/about/">{{ blog.written_by.first_name }} {{ blog.written_by.last_name }}</a>&nbsp;&middot;&nbsp;{{ blog.created_on|date }}<em></em></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ blog.content|safe }}
+	       	    {% disqus_show_comments %}
+                </div>
+            </div>
+            {% if next_blog %}
+                <ul class="pager">
+                    <li class="next">
+                        <a href="{{next_blog.get_url}}">Next Post &rarr;</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </article>
+    <hr>
+{% endblock innerbody %}
